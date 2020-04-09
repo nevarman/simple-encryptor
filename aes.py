@@ -25,8 +25,10 @@ def encrypt(key, in_filename, out_filename=None, chunksize=64*1024):
     """
     if not out_filename:
         out_filename = in_filename + '.enc'
+    elif out_filename and '.enc' not in out_filename:
+        out_filename = out_filename + '.enc'
 
-    iv = Random.new().read(AES.block_size)#''.join(chr(random.randint(0, 0xFF)) for i in range(16))
+    iv = Random.new().read(AES.block_size)
     encryptor = AES.new(key, AES.MODE_CBC, iv)
     filesize = os.path.getsize(in_filename)
 

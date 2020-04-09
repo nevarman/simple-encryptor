@@ -34,7 +34,8 @@ def encrypt_file(key, file, out=None):
     else:
         if not os.path.isdir(out):
             os.makedirs(out)
-    filename = Path(file).stem
+    filename = os.path.basename(file)
+    print(filename)
     aes.encrypt(key, file, os.path.join(out, filename))
     webbrowser.open(out)
 
